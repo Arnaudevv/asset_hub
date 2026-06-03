@@ -1,0 +1,323 @@
+/* ============================================================
+   CATEGORIES VIEW STYLESHEET
+   Handles layout, colors, and animations for category cards
+   ============================================================ */
+
+/* ── Page layout (mirrors .products-page) ── */
+.categories-page {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px);
+}
+
+.categories-header {
+    flex-shrink: 0;
+    padding-top: var(--spacing-xl);
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+}
+
+.categories-header h2 {
+    font-size: 2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.5px;
+}
+
+.categories-header p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 0;
+}
+
+/* ── Scroll container ── */
+.categories-scroll-wrapper {
+    position: relative;
+    flex: 1;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+.categories-scroll-wrapper::-webkit-scrollbar {
+    width: 5px;
+}
+
+.categories-scroll-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.categories-scroll-wrapper::-webkit-scrollbar-thumb {
+    background-color: rgba(15, 98, 254, 0.25);
+    border-radius: var(--radius-md);
+}
+
+.categories-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--spacing-2xl);
+    padding: var(--spacing-xl) 0;
+}
+.category-card {
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-2xl) var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 320px;
+    transition: var(--transition-smooth);
+    border: none;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Background gradient overlay effect */
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.3) 100%);
+    pointer-events: none;
+}
+
+.category-card-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.category-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: var(--shadow-lg);
+}
+
+.category-card-header {
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.category-card-title {
+    font-size: 18px;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-2xl);
+    letter-spacing: -0.4px;
+    text-transform: capitalize;
+}
+
+.category-card-emoji {
+    font-size: 72px;
+    line-height: 1;
+    margin: var(--spacing-md) 0;
+    display: block;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover .category-card-emoji {
+    transform: scale(1.15) rotate(8deg);
+}
+
+.category-card-footer {
+    width: 100%;
+    margin-top: auto;
+    padding-top: var(--spacing-2xl);
+}
+
+/* ============================================================
+   BUTTON STYLES - CONFIGURE BUTTON AND ACTION BUTTONS
+   ============================================================ */
+
+.category-card-buttons-container {
+    width: 100%;
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: center;
+}
+
+.category-card-button {
+    flex: 1;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+    position: relative;
+    z-index: 2;
+}
+
+.category-card-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* ╔════════════════════════════════════════════════════════╗
+   ║                   ACTION BUTTONS                       ║
+   ║  These buttons (Edit and Delete) appear when the      ║
+   ║  Configure button is clicked. They replace the        ║
+   ║  Configure button with a smooth split animation.      ║
+   ╚════════════════════════════════════════════════════════╝ */
+
+.category-action-button {
+    opacity: 0;
+    transform: scale(0.7);
+    transition: var(--transition-smooth);
+    display: none;
+    flex: 1;
+}
+
+.category-action-button.show {
+    opacity: 1;
+    transform: scale(1);
+    display: flex;
+}
+
+.category-button-edit {
+    background: rgba(107, 114, 128, 0.12);
+    color: #4b5563;
+    border: 1.5px solid rgba(107, 114, 128, 0.25);
+}
+
+.category-button-edit:hover {
+    background: rgba(107, 114, 128, 0.18);
+    border-color: rgba(107, 114, 128, 0.4);
+    color: #374151;
+}
+
+.category-button-delete {
+    background: rgba(220, 38, 38, 0.08);
+    color: rgba(220, 38, 38, 0.8);
+    border: 1.5px solid rgba(220, 38, 38, 0.2);
+}
+
+.category-button-delete:hover {
+    background: rgba(220, 38, 38, 0.12);
+    border-color: rgba(220, 38, 38, 0.4);
+}
+
+.category-card-button-configure {
+    opacity: 1;
+    transform: scale(1);
+    transition: var(--transition-normal);
+    flex: 1;
+    background: rgba(107, 114, 128, 0.08);
+    color: rgba(107, 114, 128, 0.8);
+    border: 1.5px solid rgba(107, 114, 128, 0.2);
+}
+
+.category-card-button-configure:hover {
+    background: rgba(107, 114, 128, 0.12);
+    border-color: rgba(107, 114, 128, 0.4);
+}
+
+.category-card-button-configure.hide {
+    opacity: 0;
+    transform: scale(0.7);
+    pointer-events: none;
+    display: none;
+}
+
+/* Reglas generales para la tarjeta */
+.category-card {
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-2xl) var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 320px;
+    transition: var(--transition-smooth);
+    border: none;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.3) 100%);
+    pointer-events: none;
+}
+
+
+
+
+@media (max-width: 768px) {
+    .categories-header {
+        padding-top: var(--spacing-sm) !important;
+        padding-left: var(--spacing-sm) !important;
+        padding-right: var(--spacing-sm) !important;
+    }
+
+    .categories-header h2 {
+        font-size: 1.25rem !important;
+        margin-bottom: 0.25rem !important;
+    }
+
+    .categories-header p {
+        font-size: 0.85rem !important;
+    }
+
+    .categories-scroll-wrapper {
+        padding-left: var(--spacing-sm) !important;
+        padding-right: var(--spacing-sm) !important;
+    }
+
+    .categories-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: var(--spacing-xl);
+        padding: var(--spacing-2xl) 0;
+    }
+
+    .category-card {
+        min-height: 280px;
+        padding: var(--spacing-2xl) var(--spacing-lg);
+    }
+
+    .category-card-emoji {
+        font-size: 56px;
+        margin: var(--spacing-md) 0;
+    }
+
+    .category-card-title {
+        font-size: 16px;
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .category-card:hover {
+        transform: translateY(-8px) scale(1.01);
+    }
+
+    .category-card:hover .category-card-emoji {
+        transform: scale(1.1) rotate(5deg);
+    }
+}

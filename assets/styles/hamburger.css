@@ -1,0 +1,119 @@
+/* ============================================================
+   HAMBURGER MENU — MOBILE ONLY  (<768px)
+   File: assets/styles/hamburger.css
+   Import in main.css: @import url('./hamburger.css');
+   ============================================================ */
+
+/* ── Hamburger button ── */
+.hamburger-btn {
+    display: none; /* hidden on desktop */
+}
+@media (max-width: 767.98px) {
+    .sidebar.is-open {
+        display: block !important;
+    }
+}
+@media (max-width: 767.98px) {
+    .sidebar {
+        display: block !important;
+        transform: translateX(-100%);
+        transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar.is-open {
+        transform: translateX(0);
+    }
+}
+@media (max-width: 767.98px) {
+
+    /* ── Button visible on mobile ── */
+    .hamburger-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+
+        position: fixed;
+        top: 14px;
+        right: 16px;
+        z-index: 1100;
+
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        border: none;
+        border-radius: var(--radius-lg, 10px);
+        background: var(--dark, #1a1a2e);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .hamburger-btn:hover {
+        background: var(--primary, #0f62fe);
+        transform: scale(1.05);
+    }
+
+    /* ── The three bars ── */
+    .hamburger-btn .bar {
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: #ffffff;
+        border-radius: 2px;
+        transform-origin: center;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                    opacity   0.2s ease,
+                    width     0.2s ease;
+    }
+
+    /* ── Open state → Cross (×) ── */
+    .hamburger-btn.is-open .bar:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger-btn.is-open .bar:nth-child(2) {
+        opacity: 0;
+        width: 0;
+    }
+    .hamburger-btn.is-open .bar:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* ── Dark overlay behind the sidebar ── */
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(2px);
+        z-index: 1050;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .sidebar-overlay.is-visible {
+        display: block;
+        opacity: 1;
+    }
+
+    /* ── Sliding sidebar on mobile ── */
+    .sidebar {
+        /* shifted off-screen by default */
+        transform: translateX(-100%);
+        transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1060 !important;
+        /* Ensuring the sidebar is above the overlay */
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        height: 100vh !important;
+        width: 240px !important;
+        min-width: 240px !important;
+    }
+
+    .sidebar.is-open {
+        transform: translateX(0);
+        box-shadow: 6px 0 32px rgba(0, 0, 0, 0.3);
+    }
+}

@@ -1,0 +1,282 @@
+/* =================== DASHBOARD VIEW STYLES =================== */
+
+.dashboard-scroll-wrapper {
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100vh;
+    padding: var(--spacing-2xl);
+    padding-top: 0;
+    padding-bottom: 80px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+
+.dashboard-scroll-wrapper::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dashboard-scroll-wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.dashboard-scroll-wrapper::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: var(--radius-md);
+}
+
+@media (max-width: 767.98px) {
+    .dashboard-scroll-wrapper {
+        padding: var(--spacing-lg);
+        padding-top: 0;
+        padding-bottom: 100px;
+        height: 100vh;
+    }
+}
+
+/* Grid and Spacing */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-2xl);
+    margin-bottom: var(--spacing-3xl);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-xl);
+    margin-bottom: var(--spacing-3xl);
+}
+
+/* Metric / Stat Card */
+.stat-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-xs);
+    transition: var(--transition-spring);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-primary-md);
+    border-color: rgba(15, 98, 254, 0.2);
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--primary);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.stat-card:hover::before {
+    opacity: 1;
+}
+
+/* Customized Left Border Accent Colors for Cards */
+.stat-card-total::before { background: var(--primary); }
+.stat-card-value::before { background: var(--success); }
+.stat-card-avg::before { background: var(--secondary); }
+.stat-card-expensive::before { background: var(--accent); }
+
+.stat-card__info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-card__label {
+    font-size: 0.85rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: var(--spacing-xs);
+}
+
+.stat-card__value {
+    font-size: 1.8rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.stat-card__icon {
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: var(--transition-normal);
+}
+
+/* Light background colors with soft opacity for icons */
+.stat-card-total .stat-card__icon {
+    background: rgba(15, 98, 254, 0.08);
+    color: var(--primary);
+}
+.stat-card-value .stat-card__icon {
+    background: rgba(36, 161, 72, 0.08);
+    color: var(--success);
+}
+.stat-card-avg .stat-card__icon {
+    background: rgba(0, 217, 255, 0.08);
+    color: var(--secondary);
+}
+.stat-card-expensive .stat-card__icon {
+    background: rgba(255, 91, 0, 0.08);
+    color: var(--accent);
+}
+
+.stat-card:hover .stat-card__icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Chart Card container */
+.chart-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-2xl);
+    box-shadow: var(--shadow-xs);
+    transition: var(--transition-normal);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.chart-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+}
+
+.chart-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-xl);
+}
+
+.chart-card__title {
+    font-size: 1.1rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.chart-card__subtitle {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    flex-grow: 1;
+    min-height: 250px;
+}
+
+/* Top Expensive Products List style */
+.expensive-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.expensive-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--light);
+    border-radius: var(--radius-lg);
+    border: 1px solid transparent;
+    transition: var(--transition-fast);
+}
+
+.expensive-item:hover {
+    background: var(--bg-primary);
+    border-color: var(--border);
+    transform: translateX(4px);
+    box-shadow: var(--shadow-xs);
+}
+
+.expensive-item__name-section {
+    display: flex;
+    flex-direction: column;
+    max-width: 70%;
+}
+
+.expensive-item__name {
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.expensive-item__shortname {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    margin-top: 2px;
+}
+
+.expensive-item__price-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.expensive-item__price {
+    font-weight: var(--font-weight-bold);
+    color: var(--accent);
+    font-size: 1.05rem;
+}
+
+.expensive-item__cat {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }

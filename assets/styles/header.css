@@ -1,0 +1,197 @@
+/* =================== HEADER / SIDEBAR =================== */
+
+.sidebar { 
+    min-height: 100vh; 
+    background: linear-gradient(180deg, var(--dark) 0%, #272727 100%);
+    color: white;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar .nav-link { 
+    color: #A8A8A8;
+    border-radius: var(--radius-sm); 
+    margin-bottom: var(--spacing-sm);
+    padding: var(--spacing-md) var(--spacing-lg) !important;
+    transition: var(--transition-normal);
+    font-weight: var(--font-weight-medium);
+    font-size: 0.95rem;
+}
+
+.sidebar .nav-link:hover { 
+    background: rgba(15, 98, 254, 0.15);
+    color: var(--secondary);
+    transform: translateX(4px);
+}
+
+.sidebar .nav-link.active { 
+    background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(15, 98, 254, 0.3);
+}
+
+.sidebar .nav-link i {
+    margin-right: 10px;
+    font-size: 1.1rem;
+}
+
+.main-content { 
+    background: linear-gradient(135deg, #FFFFFF 0%, var(--bg-tertiary) 100%);
+    min-height: 100vh;
+}
+
+.app-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: 30px;
+    padding: var(--spacing-md);
+    background: transparent;
+    border-radius: var(--radius-lg);
+    transition: var(--transition-normal);
+}
+
+.app-logo:hover {
+    background: #1c1c27;
+}
+
+.app-logo i {
+    font-size: 1.8rem;
+    color: var(--secondary);
+}
+
+.app-logo span {
+    font-weight: var(--font-weight-bold);
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+.app-logo__img {
+    height: 36px;
+    width: auto;
+    display: block;
+    margin-right: var(--spacing-md);
+}
+
+@media (min-width:768px) {
+    .app-logo__img { height: 40px; }
+}
+
+html, body { 
+    background: linear-gradient(135deg, #FFFFFF 0%, var(--bg-tertiary) 100%);
+    font-family: var(--font-family);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* =========================
+   Logo hover reveal
+   ========================= */
+
+.app-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    margin-bottom: 30px;
+    padding: var(--spacing-md) 0;
+    background: transparent;
+    border-radius: var(--radius-lg);
+    position: relative;
+    transition: var(--transition-normal);
+}
+
+/* Logo image */
+.app-logo__img {
+    height: 36px;
+    width: auto;
+    display: block;
+    flex: 0 0 auto;
+    transition: transform 0.25s ease;
+}
+
+/* Hidden text (reveals on hover) */
+.logo-text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 0;
+    opacity: 0;
+    margin: 0;
+    font-weight: var(--font-weight-bold);
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    transition:
+        max-width 1s cubic-bezier(0.2, 0.9, 0.2, 1),
+        opacity 0.45s ease,
+        margin-left 0.36s ease;
+}
+
+/* Hover / focus reveal */
+.app-logo:hover .logo-text,
+.app-logo:focus-visible .logo-text {
+    max-width: 220px;
+    opacity: 1;
+    margin-left: 0px;
+}
+
+.app-logo:hover .app-logo__img {
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .app-logo__img {
+        height: 40px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .logo-text {
+        display: none;
+    }
+}
+
+/* =================== Fixed sidebar width & centered logo =================== */
+
+/* Force a fixed sidebar width on desktop/tablet; keep bootstrap collapse on mobile */
+@media (min-width: 768px) {
+    .sidebar {
+        width: var(--sidebar-width) !important;
+        min-width: var(--sidebar-width) !important;
+        max-width: var(--sidebar-width) !important;
+        flex: 0 0 var(--sidebar-width) !important;
+    }
+
+    .main-content {
+        margin-left: var(--sidebar-width) !important;
+        width: calc(100% - var(--sidebar-width)) !important;
+        max-width: calc(100% - var(--sidebar-width)) !important;
+        overflow-x: hidden;
+    }
+}
+
+/* On small screens, keep default behavior (sidebar hidden via Bootstrap collapse) */
+@media (max-width: 767.98px) {
+    .sidebar {
+        width: auto !important;
+        min-width: 0 !important;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+    }
+}
+
+/* Center logo horizontally inside the fixed-width sidebar */
+.app-logo {
+    width: 100%;
+    justify-content: center !important;
+    padding: var(--spacing-md) 0;
+}
+
+/* Make sure logo content doesn't force sidebar size changes */
+.app-logo span {
+    display: inline-block;
+    white-space: nowrap;
+}
